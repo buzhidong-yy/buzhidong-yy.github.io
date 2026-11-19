@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 3 事件处理课堂练习（填空版）</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Vue 3 事件处理课堂练习</h2>
+        <p>要求：根据注释提示，将下划线替换为正确代码。</p>
+
+        <h3>任务一：按钮点击与参数传递</h3>
+        <!-- 第1空：使用插值表达式显示 data 中的 count 变量 -->
+        <p>当前计数：{{ ______ }}</p>
+
+        <!-- 第2空：绑定单击事件，调用 add(1) -->
+        <button @______="add(1)">加 1</button>
+
+        <!-- 第3空：向 add 方法传入数字 2 -->
+        <button @click="add(______) ">加 2</button>
+
+        <!-- 第4空：绑定双击事件，调用 reset 方法 -->
+        <button @______="reset">双击清零</button>
+
+        <!-- 第5空：添加事件修饰符，使该按钮的事件只触发一次 -->
+        <button @click.______="onlyOnce">只能点击生效一次</button>
+
+        <!-- 第6空：传递 Vue 提供的原生事件对象给 showEvent 方法 -->
+        <button @click="showEvent(______)">查看事件类型（控制台）</button>
+
+        <h3>任务二：输入框与键盘事件</h3>
+        <!-- 第7空：输入框获得焦点时，执行 onFocus 方法 -->
+        <!-- 第8空：输入框失去焦点时，执行 onBlur 方法 -->
+        <!-- 第9空：输入内容修改并提交后，执行 onChange 方法 -->
+        <input type="text"
+               placeholder="输入文字后按回车或点击别处"
+               @______="onFocus"
+               @______="onBlur"
+               @______="onChange">
+
+        <!-- 第10空：只有释放回车键时才执行 onEnter 方法 -->
+        <input type="text" placeholder="输入后按 Enter"
+               @keyup.______="onEnter">
+
+        <h3>任务三：鼠标事件与事件冒泡</h3>
+        <!-- 第11空：鼠标离开该区域时，执行 onMouseOut 方法 -->
+        <div @mouseover="onMouseOver" @______="onMouseOut"
+             style="border: 1px solid blue; padding: 10px; width: 280px;">
+            鼠标移入或移出这里
+        </div>
+
+        <br>
+        <div @click="outerClick"
+             style="border: 1px solid red; padding: 15px; width: 280px;">
+            外层区域（单击会输出“外层”）
+            <br><br>
+            <!-- 第12空：阻止内层按钮的点击事件向外层冒泡 -->
+            <button @click.______="innerClick">点击内层按钮</button>
+        </div>
+
+        <h3>事件提示信息</h3>
+        <p>{{ message }}</p>
+    </div>
+
+    <script>
+        const App = {
+            data() {
+                return {
+                    // 第13空：设置 count 初始值为 0
+                    count: ______,
+                    message: "等待操作"
+                }
+            },
+            methods: {
+                add(step) {
+                    // 第14空：将 step 累加到 count（填写运算符）
+                    this.count ______ step;
+                },
+                reset() {
+                    // 第15空：把计数器重置为 0
+                    this.count = ______;
+                },
+                onlyOnce() {
+                    this.message = "这个按钮的点击事件只生效一次";
+                },
+                showEvent(event) {
+                    // 第16空：输出事件对象的 type 属性
+                    console.log(event.______);
+                },
+                onFocus() {
+                    this.message = "输入框获得焦点";
+                },
+                onBlur() {
+                    this.message = "输入框失去焦点";
+                },
+                onChange(event) {
+                    // 第17空：通过事件对象获取触发事件的输入框元素
+                    this.message = "输入内容：" + event.______.value;
+                },
+                onEnter() {
+                    this.message = "按下了回车键";
+                },
+                onMouseOver() {
+                    this.message = "鼠标移入";
+                },
+                onMouseOut() {
+                    this.message = "鼠标移出";
+                },
+                outerClick() {
+                    console.log("外层");
+                },
+                innerClick() {
+                    console.log("内层");
+                }
+            }
+        };
+        Vue.createApp(App).mount("#app");
+    </script>
+</body>
+</html>
